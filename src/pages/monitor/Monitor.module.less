@@ -1,1 +1,42 @@
-.page { padding: 12px; }
+.monitor {
+  padding: 24px;
+  background: #f0f2f5;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.resourceCard {
+  text-align: center;
+  position: relative;
+
+  .label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.smallChart {
+  margin-top: 16px;
+}

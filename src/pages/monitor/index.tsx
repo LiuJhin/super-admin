@@ -1,2 +1,9 @@
+// src/pages/monitor/index.tsx
+import React from 'react'
 import Monitor from './Monitor'
-export default Monitor
+
+const MonitorPage: React.FC = () => {
+  return <Monitor />
+}
+
+export default MonitorPage
