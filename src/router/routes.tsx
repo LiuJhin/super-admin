@@ -2,9 +2,12 @@ import { lazy } from 'react'
 import type { ReactElement } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import MainLayout from '@/components/layout/MainLayout'
+import AuthGuard from '@/router/AuthGuard'
 
 const Dashboard = lazy(() => import('@/pages/Dashboard'))
 const Placeholder = lazy(() => import('@/pages/Placeholder'))
+const Login = lazy(() => import('@/pages/auth/Login'))
+const Register = lazy(() => import('@/pages/auth/Register'))
 
 export type RouteItem = {
   path: string
@@ -76,12 +79,18 @@ export function genRouter(roles: string[]) {
   return createBrowserRouter([
     {
       path: '/',
-      element: <MainLayout />,
+      element: (
+        <AuthGuard>
+          <MainLayout />
+        </AuthGuard>
+      ),
       children: allowed.map((r) =>
         r.path === '/'
           ? { index: true, element: r.element }
           : { path: r.path.replace(/^\//, ''), element: r.element }
       ),
     },
+    { path: '/login', element: <Login /> },
+    { path: '/register', element: <Register /> },
   ])
 }

@@ -33,8 +33,9 @@ export default function MainLayout() {
   const { collapsed, theme, tags, locale, primaryColor, watermark } = useAppSelector(
     (s) => s.layout
   )
+  const authRoles = useAppSelector((s) => s.auth.roles)
   const [mobile, setMobile] = useState(false)
-  const roles = useMemo(() => ['admin'], [])
+  const roles = useMemo(() => authRoles, [authRoles])
 
   useEffect(() => {
     const handle = () => setMobile(window.innerWidth < 992)

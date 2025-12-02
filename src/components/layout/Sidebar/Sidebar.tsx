@@ -36,7 +36,12 @@ export function Sidebar({
 }) {
   if (mobile) {
     return (
-      <Drawer open={!collapsed} onClose={() => onCollapseChange(true)} placement="left" width={220}>
+      <Drawer
+        open={!collapsed}
+        onClose={() => onCollapseChange(true)}
+        placement="left"
+        size="default"
+      >
         <Menu
           mode="inline"
           selectedKeys={[selectedPath]}

@@ -1,0 +1,205 @@
+.container {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --primary: #436dff; /* 改这里换主色 */
+}
+
+/* 左侧 */
+.leftPanel {
+  flex: 1;
+  min-width: 420px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.formCard {
+  width: 100%;
+  max-width: 400px;
+  padding: 0 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 48px;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+.welcome {
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0 0 48px 0;
+  color: #1a1a1a;
+}
+
+.welcome strong {
+  color: var(--primary);
+}
+
+/* Tabs */
+:global(.ant-tabs.tabs .ant-tabs-nav) {
+  margin-bottom: 40px !important;
+}
+:global(.ant-tabs.tabs .ant-tabs-tab) {
+  font-size: 18px !important;
+  font-weight: 500 !important;
+}
+:global(.ant-tabs.tabs .ant-tabs-ink-bar) {
+  background: var(--primary);
+  height: 3px !important;
+}
+
+/* 表单：为普通输入设置样式，为密码输入只设置外层 affix wrapper，避免双重边框 */
+:global(.ant-input) {
+  height: 52px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #e8e8e8 !important;
+  font-size: 16px !important;
+}
+:global(.ant-input:focus) {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(67, 109, 255, 0.15) !important;
+}
+:global(.ant-input-affix-wrapper) {
+  height: 52px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #e8e8e8 !important;
+}
+:global(.ant-input-affix-wrapper-focused) {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(67, 109, 255, 0.15) !important;
+}
+/* 关键：密码框内部 input 去掉边框与阴影，避免双重边框视觉重叠 */
+:global(.ant-input-affix-wrapper .ant-input) {
+  border: none !important;
+  box-shadow: none !important;
+  height: 100% !important;
+}
+
+.formExtra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0 32px;
+  font-size: 14px;
+}
+.forgot {
+  color: var(--primary);
+}
+
+:global(.ant-btn-primary) {
+  height: 52px !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  background: var(--primary) !important;
+  box-shadow: 0 8px 24px rgba(67, 109, 255, 0.3);
+}
+:global(.ant-btn-primary:hover) {
+  background: #3058ff !important;
+  transform: translateY(-2px);
+}
+
+.signup {
+  text-align: center;
+  margin-top: 32px;
+  color: #666;
+  font-size: 14px;
+}
+.signup .link {
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+/* 右侧 - 用 SVG 曲线，永不出错 */
+.rightPanel {
+  flex: 1.2;
+  position: relative;
+  background: var(--primary);
+  color: white;
+  overflow: hidden;
+}
+
+.curve {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.rightContent {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  margin-left: 120px;
+  margin-top: 140px;
+}
+
+.rightContent h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.desc {
+  font-size: 18px;
+  line-height: 1.8;
+  opacity: 0.95;
+  margin-bottom: 48px;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  font-size: 17px;
+  line-height: 2.4;
+}
+
+.features li {
+  position: relative;
+  padding-left: 8px;
+}
+
+.features li::before {
+  content: '✓';
+  position: absolute;
+  left: -28px;
+  color: #a8c8ff;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* 响应式：小屏直接隐藏右侧 */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+  }
+  .leftPanel {
+    min-width: unset;
+    height: 100vh;
+    justify-content: center;
+  }
+  .rightPanel {
+    display: none;
+  }
+}

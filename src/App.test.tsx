@@ -1,15 +1,19 @@
 import { render, screen } from '@testing-library/react'
-import App from './App'
+import Login from '@/pages/auth/Login'
 import { Provider } from 'react-redux'
 import { store } from '@/store'
+import { MemoryRouter } from 'react-router-dom'
 import '@/i18n'
+jest.spyOn(console, 'error').mockImplementation(() => {})
 
-test('renders dashboard', async () => {
+test('renders login page', async () => {
   render(
     <Provider store={store}>
-      <App />
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>
     </Provider>
   )
-  const items = await screen.findAllByText(/Dashboard/i)
-  expect(items.length).toBeGreaterThan(0)
+  const title = await screen.findByText(/登录/i)
+  expect(title).toBeInTheDocument()
 })

@@ -110,7 +110,7 @@ export function HeaderBar({
         <Dropdown
           open={notifOpen}
           onOpenChange={setNotifOpen}
-          dropdownRender={() => (
+          popupRender={() => (
             <div style={{ width: 280, padding: 8 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                 <span>通知</span>
@@ -181,7 +181,12 @@ export function HeaderBar({
         </Dropdown>
       </div>
 
-      <Drawer title="设置" open={openSettings} onClose={() => setOpenSettings(false)} width={320}>
+      <Drawer
+        title="设置"
+        open={openSettings}
+        onClose={() => setOpenSettings(false)}
+        size="default"
+      >
         <Space direction="vertical" style={{ width: '100%' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span>暗黑模式</span>
