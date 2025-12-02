@@ -15,7 +15,7 @@ import type { MenuProps } from 'antd'
 import { PRESETS } from '@/utils/theme'
 import * as Icons from '@ant-design/icons'
 import { useState } from 'react'
-import styles from './HeaderBar.module.css'
+import styles from './HeaderBar.module.less'
 
 export function HeaderBar({
   theme,

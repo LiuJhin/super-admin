@@ -1,6 +1,6 @@
 import { Form, Input, Button, Tabs, message } from 'antd'
 import { useState } from 'react'
-import styles from './Auth.module.css'
+import styles from './Auth.module.less'
 import { useAppDispatch } from '@/store/hooks'
 import { login } from '@/store/authSlice'
 import { useNavigate, useLocation } from 'react-router-dom'

@@ -1,7 +1,7 @@
 import { Tag } from 'antd'
 import { IconRender } from '@/components/layout/Common/IconRender'
 import type { TagItem } from '@/store/layoutSlice'
-import styles from './TagsView.module.css'
+import styles from './TagsView.module.less'
 
 export function TagsView({
   tags,

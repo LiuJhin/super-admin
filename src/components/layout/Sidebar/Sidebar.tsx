@@ -3,7 +3,7 @@ import type { MenuProps } from 'antd'
 import i18n from '@/i18n'
 import type { MenuItem } from '@/router/menu'
 import { IconRender } from '@/components/layout/Common/IconRender'
-import styles from './Sidebar.module.css'
+import styles from './Sidebar.module.less'
 
 const { Sider } = Layout
 

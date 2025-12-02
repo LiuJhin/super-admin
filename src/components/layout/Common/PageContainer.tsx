@@ -1,5 +1,5 @@
 import { Space } from 'antd'
-import styles from './PageContainer.module.css'
+import styles from './PageContainer.module.less'
 
 export function PageContainer({
   title,

@@ -13,7 +13,7 @@ import {
   setLocale,
   setPrimaryColor,
 } from '@/store/layoutSlice'
-import styles from './MainLayout.module.css'
+import styles from './MainLayout.module.less'
 import { menu as menuConfig, filterMenuByRoles } from '@/router/menu'
 import type { MenuItem } from '@/router/menu'
 import { PRESETS, setTheme as applyTheme, setPrimaryColor as applyPrimary } from '@/utils/theme'
