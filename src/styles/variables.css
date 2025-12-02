@@ -6,6 +6,9 @@
   --color-error: #ff4d4f;
   --color-text: #1f1f1f;
   --color-bg: #ffffff;
+  --header-bg: #ffffff;
+  --sider-bg: #ffffff;
+  --border-color: #f0f0f0;
   --radius-xl: 12px;
 }
 
@@ -17,4 +20,7 @@
   --color-error: #a61d24;
   --color-text: #e6f4ff;
   --color-bg: #0b0f19;
+  --header-bg: #0f172a;
+  --sider-bg: #0f172a;
+  --border-color: #1f2937;
 }

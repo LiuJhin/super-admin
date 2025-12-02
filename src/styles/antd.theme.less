@@ -8,18 +8,23 @@
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
-
 .ant-btn-default {
   color: var(--color-text);
 }
 
-// 菜单与布局
+// 布局与头部/侧边
 .ant-layout {
   background: var(--color-bg);
 }
-.ant-menu-dark,
+.ant-layout-header {
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+}
 .ant-layout-sider {
-  background: #0f172a;
+  background: var(--sider-bg);
+}
+.ant-layout-sider .ant-menu {
+  background: transparent;
 }
 
 // 通知、警告颜色

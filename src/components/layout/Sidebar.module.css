@@ -1,0 +1,44 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+.logoIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--color-primary);
+}
+.logoText {
+  font-weight: 600;
+}
+.footer {
+  margin-top: auto;
+  padding: 12px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footerTitle {
+  font-size: 12px;
+  color: #666;
+}
+.colors {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+}
+.colorDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.link {
+  font-size: 12px;
+  color: var(--color-primary);
+}
