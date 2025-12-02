@@ -26,3 +26,8 @@
   background: var(--bg-tags, #fafafa);
   border-bottom: 1px solid var(--border-color);
 }
+.footer {
+  border-top: 1px solid var(--border-color);
+  background: var(--header-bg);
+  color: #888;
+}

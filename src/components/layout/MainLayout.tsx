@@ -21,6 +21,8 @@ import { Sidebar } from './Sidebar'
 import { HeaderBar } from './HeaderBar'
 import { TagsView } from './TagsView'
 import { Breadcrumbs } from './Breadcrumbs'
+import { PageContainer } from './PageContainer'
+import i18n from '@/i18n'
 
 const { Header, Content, Footer } = Layout
 
@@ -92,7 +94,6 @@ export default function MainLayout() {
         onMenuClick={onMenuClick}
         mobile={mobile}
         onLogoClick={() => navigate('/')}
-        onPresetChange={(k) => dispatch(setPrimaryColor(PRESETS[k]))}
       />
       <Layout>
         <Header className={styles.header}>
@@ -124,10 +125,14 @@ export default function MainLayout() {
           />
         </div>
         <Content className={styles.content}>
-          <Breadcrumbs pathname={location.pathname} />
-          <Outlet />
+          {/* <Breadcrumbs pathname={location.pathname} /> */}
+          <PageContainer title={getCurrentTitle(location.pathname)} watermark={watermark}>
+            <Outlet />
+          </PageContainer>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>© 2025 Super Admin</Footer>
+        <Footer className={styles.footer} style={{ textAlign: 'center' }}>
+          © 2025 Super Admin
+        </Footer>
       </Layout>
     </Layout>
   )
@@ -143,4 +148,18 @@ function searchAndGo(q: string, list: MenuItem[], navigate: (p: string) => void)
   travel(list)
   const found = flat.find((x) => x.title.toLowerCase().includes(q.toLowerCase()))
   if (found?.path) navigate(found.path)
+}
+
+function getCurrentTitle(pathname: string): string {
+  const all: MenuItem[] = []
+  const dig = (l: MenuItem[]) =>
+    l.forEach((m) => {
+      all.push(m)
+      if (m.children) dig(m.children)
+    })
+  dig(menuConfig)
+  const found = all.find((m) => m.path === pathname)
+  if (!found) return 'Page'
+  if (found.title?.startsWith('menu.')) return i18n.t(found.title)
+  return found.title
 }

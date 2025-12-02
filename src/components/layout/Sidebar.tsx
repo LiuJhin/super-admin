@@ -4,7 +4,6 @@ import i18n from '@/i18n'
 import type { MenuItem } from '@/router/menu'
 import { IconRender } from './IconRender'
 import styles from './Sidebar.module.css'
-import { PRESETS } from '@/utils/theme'
 
 const { Sider } = Layout
 
@@ -26,7 +25,6 @@ export function Sidebar({
   onMenuClick,
   mobile,
   onLogoClick,
-  onPresetChange,
 }: {
   items: MenuItem[]
   selectedPath: string
@@ -35,7 +33,6 @@ export function Sidebar({
   onMenuClick: MenuProps['onClick']
   mobile: boolean
   onLogoClick?: () => void
-  onPresetChange?: (key: keyof typeof PRESETS) => void
 }) {
   if (mobile) {
     return (
