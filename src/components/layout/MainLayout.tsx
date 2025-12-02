@@ -96,7 +96,7 @@ export default function MainLayout() {
         mobile={mobile}
         onLogoClick={() => navigate('/')}
       />
-      <Layout>
+      <Layout className={styles.inner}>
         <Header className={styles.header}>
           <HeaderBar
             theme={theme}

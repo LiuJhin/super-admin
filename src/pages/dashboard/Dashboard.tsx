@@ -14,7 +14,13 @@ export default function Dashboard() {
       <Row gutter={12} className={styles.grid}>
         {stats.map((s) => (
           <Col key={s.key} xs={12} md={6}>
-            <StatsCard title={s.title} value={s.value} prefix={s.prefix} />
+            <StatsCard
+              title={s.title}
+              value={s.value}
+              prefix={s.prefix}
+              icon={s.icon as any}
+              color={s.color}
+            />
           </Col>
         ))}
       </Row>

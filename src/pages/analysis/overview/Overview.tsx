@@ -1,7 +1,8 @@
 // src/pages/overview/Overview.tsx
 import React from 'react'
 import styles from './Overview.module.less'
-import { Card, Row, Col, Statistic, Progress, List, Avatar, Tag } from 'antd'
+import { Card, Row, Col, Statistic, List, Avatar, Tag } from 'antd'
+import { PageHeader } from '@/components/ui/PageHeader'
 import {
   ArrowUpOutlined,
   ArrowDownOutlined,
@@ -69,7 +70,7 @@ const Overview: React.FC = () => {
 
   return (
     <div className={styles.overview}>
-      <h1 className={styles.pageTitle}>总览仪表盘</h1>
+      <PageHeader title="总览仪表盘" subtitle="关键指标与趋势" />
 
       {/* 统计卡片区域 */}
       <Row gutter={[16, 16]}>

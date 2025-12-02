@@ -20,8 +20,9 @@ const generateResourceData = () => ({
 const Monitor: React.FC = () => {
   const [resource, setResource] = useState(generateResourceData())
   const [cpuData, setCpuData] = useState<number[]>([])
-  const [memData, setMemData] = useState<number[]>([])
+  const [memSeries, setMemSeries] = useState<number[]>([])
   const [respData, setRespData] = useState<number[]>([])
+  const [onlineData, setOnlineData] = useState<number[]>([])
   const [timeLabels, setTimeLabels] = useState<string[]>([])
   const timerRef = useRef<number | null>(null)
 
@@ -52,8 +53,9 @@ const Monitor: React.FC = () => {
       setResource(newData)
       setTimeLabels((prev) => [...prev.slice(-59), now])
       setCpuData((prev) => [...prev.slice(-59), newData.cpu])
-      setMemData((prev) => [...prev.slice(-59), newData.memory])
+      setMemSeries((prev) => [...prev.slice(-59), newData.memory])
       setRespData((prev) => [...prev.slice(-59), newData.responseTime])
+      setOnlineData((prev) => [...prev.slice(-59), newData.onlineUsers])
     }, 2000)
   }
 
@@ -66,8 +68,9 @@ const Monitor: React.FC = () => {
     })
     setTimeLabels(initLabels)
     setCpuData(Array(60).fill(0))
-    setMemData(Array(60).fill(0))
+    setMemSeries(Array(60).fill(0))
     setRespData(Array(60).fill(0))
+    setOnlineData(Array(60).fill(0))
 
     startAutoRefresh()
     return () => {
@@ -82,20 +85,25 @@ const Monitor: React.FC = () => {
   }
 
   // ECharts 配置
-  const getOption = (title: string, data: number[], color: string) => ({
+  const getOption = (
+    title: string,
+    data: number[],
+    color: string,
+    opts?: { max?: number }
+  ) => ({
     tooltip: { trigger: 'axis' },
-    grid: { left: 40, right: 20, top: 40, bottom: 30 },
+    grid: { left: 40, right: 20, top: 40, bottom: 30, containLabel: true },
     xAxis: {
       type: 'category',
       data: timeLabels,
       boundaryGap: false,
       axisLine: { show: false },
       axisTick: { show: false },
-      axisLabel: { fontSize: 10, color: '#999' },
+      axisLabel: { fontSize: 10, color: '#999', hideOverlap: true, interval: 'auto' },
     },
     yAxis: {
       type: 'value',
-      max: title.includes('响应') ? undefined : 100,
+      max: opts?.max,
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { lineStyle: { type: 'dashed' } },
@@ -103,6 +111,31 @@ const Monitor: React.FC = () => {
     series: [
       {
         name: title,
+        type: 'line',
+        smooth: true,
+        symbol: 'none',
+        lineStyle: { width: 2, color },
+        areaStyle: { color, opacity: 0.1 },
+        data,
+      },
+    ],
+  })
+
+  const getMiniOption = (data: number[], color: string) => ({
+    tooltip: { trigger: 'axis' },
+    grid: { left: 0, right: 0, top: 0, bottom: 0 },
+    xAxis: {
+      type: 'category',
+      data: timeLabels.slice(-data.length),
+      boundaryGap: false,
+      show: false,
+    },
+    yAxis: {
+      type: 'value',
+      show: false,
+    },
+    series: [
+      {
         type: 'line',
         smooth: true,
         symbol: 'none',
@@ -127,22 +160,46 @@ const Monitor: React.FC = () => {
         <Col xs={24} sm={12} lg={6}>
           <Card className={styles.resourceCard}>
             <div className={styles.label}>CPU 使用率</div>
-            <Progress type="circle" percent={resource.cpu} strokeColor="#1890ff" size={80} />
-            <div className={styles.value}>{resource.cpu}%</div>
+            <div className={styles.circleWrap}>
+              <Progress
+                type="circle"
+                percent={resource.cpu}
+                strokeColor="#1890ff"
+                size={80}
+                format={() => ''}
+              />
+              <div className={styles.value}>{resource.cpu}%</div>
+            </div>
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <Card className={styles.resourceCard}>
             <div className={styles.label}>内存使用率</div>
-            <Progress type="circle" percent={resource.memory} strokeColor="#52c41a" size={80} />
-            <div className={styles.value}>{resource.memory}%</div>
+            <div className={styles.circleWrap}>
+              <Progress
+                type="circle"
+                percent={resource.memory}
+                strokeColor="#52c41a"
+                size={80}
+                format={() => ''}
+              />
+              <div className={styles.value}>{resource.memory}%</div>
+            </div>
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <Card className={styles.resourceCard}>
             <div className={styles.label}>磁盘使用率</div>
-            <Progress type="circle" percent={resource.disk} strokeColor="#faad14" size={80} />
-            <div className={styles.value}>{resource.disk}%</div>
+            <div className={styles.circleWrap}>
+              <Progress
+                type="circle"
+                percent={resource.disk}
+                strokeColor="#faad14"
+                size={80}
+                format={() => ''}
+              />
+              <div className={styles.value}>{resource.disk}%</div>
+            </div>
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
@@ -153,10 +210,7 @@ const Monitor: React.FC = () => {
               prefix={<Badge status="processing" />}
             />
             <div className={styles.smallChart}>
-              <ReactECharts
-                option={getOption('', respData.slice(-20), '#722ed1')}
-                style={{ height: 60 }}
-              />
+              <ReactECharts option={getMiniOption(onlineData.slice(-20), '#722ed1')} style={{ height: 60 }} />
             </div>
           </Card>
         </Col>
@@ -166,14 +220,21 @@ const Monitor: React.FC = () => {
       <Row gutter={16} style={{ marginTop: 16 }}>
         <Col xs={24} lg={12}>
           <Card title="CPU & 内存趋势" extra={<Tag color="blue">实时</Tag>}>
-            <ReactECharts option={getOption('CPU', cpuData, '#1890ff')} style={{ height: 300 }} />
+            <ReactECharts
+              option={getOption('CPU', cpuData, '#1890ff', { max: 100 })}
+              style={{ height: 320 }}
+            />
+            <ReactECharts
+              option={getOption('内存', memSeries, '#52c41a', { max: 100 })}
+              style={{ height: 320, marginTop: 12 }}
+            />
           </Card>
         </Col>
         <Col xs={24} lg={12}>
           <Card title="平均响应时间 (ms)" extra={<Tag color="green">近1分钟</Tag>}>
             <ReactECharts
               option={getOption('响应时间', respData, '#13c2c2')}
-              style={{ height: 300 }}
+              style={{ height: 320 }}
             />
           </Card>
         </Col>

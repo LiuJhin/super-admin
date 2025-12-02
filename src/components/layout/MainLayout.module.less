@@ -1,4 +1,9 @@
 .layout {
+  height: 100vh;
+}
+.inner {
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 .header {
@@ -16,6 +21,8 @@
   font-weight: 600;
 }
 .content {
+  flex: 1;
+  overflow: auto;
   padding: 12px;
 }
 .tags {

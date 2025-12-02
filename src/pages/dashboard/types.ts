@@ -3,4 +3,6 @@ export type StatItem = {
   title: string
   value: number | string
   prefix?: string
+  icon?: string
+  color?: string
 }

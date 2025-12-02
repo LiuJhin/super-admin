@@ -7,4 +7,5 @@ body,
   height: 100%;
   background-color: var(--color-bg);
   color: var(--color-text);
+  overflow: hidden;
 }
