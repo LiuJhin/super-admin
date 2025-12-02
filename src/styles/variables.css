@@ -1,0 +1,20 @@
+:root {
+  --color-primary: #1677ff;
+  --color-secondary: #722ed1;
+  --color-success: #52c41a;
+  --color-warning: #faad14;
+  --color-error: #ff4d4f;
+  --color-text: #1f1f1f;
+  --color-bg: #ffffff;
+  --radius-xl: 12px;
+}
+
+.dark {
+  --color-primary: #2f54eb;
+  --color-secondary: #9254de;
+  --color-success: #49aa19;
+  --color-warning: #d48806;
+  --color-error: #a61d24;
+  --color-text: #e6f4ff;
+  --color-bg: #0b0f19;
+}

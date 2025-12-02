@@ -18,6 +18,17 @@ export default defineConfig({
       '@utils': '/src/utils',
     },
   },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        additionalData: "@import 'src/styles/variables.less';",
+      },
+      scss: {
+        additionalData: "@use 'src/styles/variables.scss' as *;",
+      },
+    },
+  },
   server: {
     proxy: {
       '/api': {

@@ -1,0 +1,37 @@
+@import (reference) './variables.css';
+
+// Ant Design v6 使用设计令牌，但仍有类名可覆盖
+// 将常用组件做有限的深度主题覆盖
+
+// 按钮
+.ant-btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.ant-btn-default {
+  color: var(--color-text);
+}
+
+// 菜单与布局
+.ant-layout {
+  background: var(--color-bg);
+}
+.ant-menu-dark,
+.ant-layout-sider {
+  background: #0f172a;
+}
+
+// 通知、警告颜色
+.ant-alert-info {
+  background-color: color-mix(in oklab, var(--color-primary) 10%, white);
+}
+.ant-alert-success {
+  background-color: color-mix(in oklab, var(--color-success) 10%, white);
+}
+.ant-alert-warning {
+  background-color: color-mix(in oklab, var(--color-warning) 10%, white);
+}
+.ant-alert-error {
+  background-color: color-mix(in oklab, var(--color-error) 10%, white);
+}
