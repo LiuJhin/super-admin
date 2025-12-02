@@ -17,11 +17,11 @@ import styles from './MainLayout.module.css'
 import { menu as menuConfig, filterMenuByRoles } from '@/router/menu'
 import type { MenuItem } from '@/router/menu'
 import { PRESETS, setTheme as applyTheme, setPrimaryColor as applyPrimary } from '@/utils/theme'
-import { Sidebar } from './Sidebar'
-import { HeaderBar } from './HeaderBar'
-import { TagsView } from './TagsView'
-import { Breadcrumbs } from './Breadcrumbs'
-import { PageContainer } from './PageContainer'
+import { Sidebar } from '@/components/layout/Sidebar/Sidebar'
+import { HeaderBar } from '@/components/layout/Header/HeaderBar'
+import { TagsView } from '@/components/layout/TagsView/TagsView'
+import { Breadcrumbs } from '@/components/layout/Common/Breadcrumbs'
+import { PageContainer } from '@/components/layout/Common/PageContainer'
 import i18n from '@/i18n'
 
 const { Header, Content, Footer } = Layout
@@ -125,7 +125,7 @@ export default function MainLayout() {
           />
         </div>
         <Content className={styles.content}>
-          {/* <Breadcrumbs pathname={location.pathname} /> */}
+          <Breadcrumbs pathname={location.pathname} />
           <PageContainer title={getCurrentTitle(location.pathname)} watermark={watermark}>
             <Outlet />
           </PageContainer>

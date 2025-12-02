@@ -2,7 +2,7 @@ import { Drawer, Layout, Menu } from 'antd'
 import type { MenuProps } from 'antd'
 import i18n from '@/i18n'
 import type { MenuItem } from '@/router/menu'
-import { IconRender } from './IconRender'
+import { IconRender } from '@/components/layout/Common/IconRender'
 import styles from './Sidebar.module.css'
 
 const { Sider } = Layout

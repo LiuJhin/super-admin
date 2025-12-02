@@ -6,7 +6,6 @@
     opacity: 1;
   }
 }
-
 .container {
   display: flex;
   align-items: center;
@@ -15,14 +14,12 @@
   padding: 8px 12px;
   overflow-x: auto;
 }
-
 .tag {
   display: inline-flex;
   align-items: center;
   animation: fadeIn 0.12s ease-in;
   margin: 0;
 }
-
 .item {
   display: inline-flex;
   align-items: center;
